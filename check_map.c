@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:05 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/05/30 16:15:26 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:01:48 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int check_player(int fd)
     int i;
     int count_player;
 
-    if (*map == NULL)
-        return (NULL);
     count_player = 0;
     while ((line = get_next_line(fd)) != NULL)
     {
@@ -43,8 +41,6 @@ int check_exit (int fd)
     int i;
     int count_exit;
 
-    if (*map == NULL)
-        return (NULL);
     count_exit = 0;
     while ((line = get_next_line(fd)) != NULL)
     {
@@ -68,8 +64,6 @@ int check_item(int fd)
     int i;
     int count_item;
 
-    if (*map == NULL)
-        return (NULL);
     count_exit = 0;
     while ((line = get_next_line(fd)) != NULL)
     {
@@ -98,21 +92,26 @@ int check_wall(int fd)
     len = ft_strlen(line);
     while(line[i])
     {
-        if (line[i] != 1)
+        if (line[i] != '1')
             return(1);
         i++;
     }
     while(line = get_next_line(fd) != NULL)
     {
         last_line = line;
-        if(line[0] != 1 || line[len - 1] != 1)
-                return(1);
+        while(line[i])
+        {
+            if(line[0] != '1' || line[len - 1] != '1')
+                    return(1);
+            i++
+        }
     }
     i = 0;
-    while(line[i])
+    while(last_line[i])
     {
-        if (line[i] != 1)
-            return(1);
+        if (last_line[i] != '1')
+            return (1);
         i++;
     }
+    return(0)
 }

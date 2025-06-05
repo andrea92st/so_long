@@ -6,15 +6,21 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:36:12 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/05/27 17:07:27 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:01:50 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main (void)
+int main (int argc, char **argv)
 {
-    int fd;
+    int i;
+    
+    if (argc != 1)
+        return(ft_putstr("error, nombre d'argument invalide"));
+    if (gamberge(argv[1]) == 1)
+        return(ft_putstr("error, probleme de map franjo"));
 
-    fd = open(argv[1], O_RDONLY);
-    check_map
 
+
+
+        
 }
