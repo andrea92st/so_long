@@ -6,78 +6,76 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:05 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/05 15:01:48 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:25:58 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"so_long.h"
 
-int check_player(int fd)
+int check_player(char **map)
 {
-    char    *line;
-    int i;
-    int count_player;
+    int x;
+    int y;
+    int count;
 
-    count_player = 0;
-    while ((line = get_next_line(fd)) != NULL)
+    count = 0;
+    y = 0;
+    while (map[y])
     {
-        i = 0;
-        while(line[i])
+        x = 0;
+        while(map[x])
         {        
-            if (line[i] == 'P')
-                count_player++;
-            i++;
+            if (map[y][x] == 'P')
+                count++;
+            x++;
         }
+        y++;
     }
-    if (count_player != 1)
-        return (1);
-    return(0);
+    return(count);
 }
 
-int check_exit (int fd)
-
+int check_exit (char **map)
 {
-    char    *line;
-    int i;
-    int count_exit;
+    int y;
+    int x;
+    int count;
 
-    count_exit = 0;
-    while ((line = get_next_line(fd)) != NULL)
+    count = 0;
+    y = 0;
+    while (map[y])
     {
-        i = 0;
-        while(line[i])
+        x = 0;
+        while(map[x])
         {        
-            if (line[i] == 'E')
-                count_exit++;
-            i++;
+            if (map[y][x] == 'E')
+                count++;
+            x++;
         }
+        y++;
     }
-    if (count_exit != 1)
-        return (1);
-    return(0);
+    return(count);
 }
 
 int check_item(int fd)
-
 {
-    char    *line;
-    int i;
-    int count_item;
+    int y;
+    int x;
+    int count;
 
-    count_exit = 0;
-    while ((line = get_next_line(fd)) != NULL)
+    count = 0;
+    y = 0;
+    while (map[y])
     {
-        i = 0;
-        while(line[i])
+        x = 0;
+        while(map[x])
         {        
-            if (line[i] == 'C')
-                count_item++;
-            i++;
+            if (map[y][x] == 'C')
+                count++;
+            x++;
         }
+        y++;
     }
-    if (count_exit < 1)
-        return (1);
-    return(0);
+    return(count);
 }
 
 int check_wall(int fd)
@@ -114,4 +112,26 @@ int check_wall(int fd)
         i++;
     }
     return(0)
+}
+int check_wall(char **map)
+{
+    int x;
+    int y;
+    int count;
+
+    count = 0;
+    x = 0;
+    while (map[0])
+    {
+        if (map[0][x] != 1)
+            count++;
+            x++;
+    }
+    x = 0;
+    while ()
+
+
+
+
+
 }

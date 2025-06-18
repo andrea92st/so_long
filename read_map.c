@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gingembre.c                                        :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 13:22:03 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/16 17:31:17 by anfiorit         ###   ########.fr       */
+/*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
+/*   Updated: 2025/06/18 18:56:29 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-int gamberge(char *str)
+static int gamberge(char *str)
 {
     int fd;
     int gamberge_bien;
@@ -33,4 +31,48 @@ int gamberge(char *str)
     if (gamberge_bien > 0)
         return (1);
     return(0)
+}
+
+static int count_lines(char *file)
+{
+    int line;
+    int fd;
+
+    fd = open (file, O_RDONLY);
+    if (fd < 0)
+        return (-1);
+    while (get_next_line(fd) != NULL)
+    {
+        line++;
+        free(line)
+    }
+    close(fd)
+    return(line)
+}
+char **map(char *file)
+{
+    int     line;
+    char    **map;
+    int     fd;
+    int     i;
+
+    line = count_lines(file)
+    if (line == 0)
+        return (NULL);
+    map = (char *) malloc (sizeof (char *) * (line + 1));
+    if (map == NULL)
+        return (NULL);
+    fd = open(file, O_RDONLY);
+    if (fd > 0)
+        return (-1);
+    while(i < line)
+    { 
+        map[i] = get_next_line(fd);
+        if (map[i] == NULL)
+            break;
+        i++;
+    }
+    map[i] == NULL;
+    close(fd);
+    return (map);
 }

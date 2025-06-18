@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:36:12 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/18 17:58:08 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/18 19:26:02 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,5 @@ int main (int argc, char **argv)
     
     if (argc != 2)
         return(ft_putstr("error, nombre d'argument invalide"));
-    if (gamberge(argv[1]) == 1)
-        return(ft_putstr("error, probleme de map franjo"));
-
-
-
-
         
 }
