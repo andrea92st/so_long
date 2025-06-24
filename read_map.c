@@ -6,29 +6,27 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/18 18:56:29 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:40:40 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int gamberge(char *str)
+static int gamberge(char **map)
 {
-    int fd;
-    int gamberge_bien;
+    int check_count;
 
-    gamberge_bien = 0;
-    fd = open(argv[1], O_RDONLY);
+    check_count = 0;
 
-    if (check_wall(fd) == 1)
-        gamberge_bien++;
-    if (check_exit(fd) == 1)
-        gamberge_bien++;
-    if (check_player(fd) == 1)
-        gamberge_bien++;
-    if (check_item(fd) == 1)
-        gamberge_bien++;
-    if (check_ground(fd) == 1)
-        gamberge_bien++;
-    if (gamberge_bien > 0)
+    if (check_wall(**map) == 1)
+        check_count++;
+    if (check_exit(**map) == 1)
+        check_count++;
+    if (check_player(**map) == 1)
+        check_count++;
+    if (check_item(**map) == 1)
+        check_count++;
+    if (check_ground(**map) == 1)
+        check_count++;
+    if (check_count > 0)
         return (1);
     return(0)
 }
@@ -49,14 +47,15 @@ static int count_lines(char *file)
     close(fd)
     return(line)
 }
-char **map(char *file)
+char **read_map(char *file)
 {
     int     line;
     char    **map;
     int     fd;
     int     i;
 
-    line = count_lines(file)
+    i = 0;
+    line = count_lines(file);
     if (line == 0)
         return (NULL);
     map = (char *) malloc (sizeof (char *) * (line + 1));
@@ -68,7 +67,7 @@ char **map(char *file)
     while(i < line)
     { 
         map[i] = get_next_line(fd);
-        if (map[i] == NULL)
+        if (map[i] = NULL)
             break;
         i++;
     }
