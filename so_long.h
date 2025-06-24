@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/23 19:41:18 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:10:04 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,57 @@ typedef struct s_game {
     void            *ground_img;
 
     t_sprite_player player;
-    char    **map;
+    char            **map;
 
     int             player_x;
     int             player_y;
 
     int             nb_collectibles;
     int             anim_frame;
+    
     int             direction;
+
+    char            next_dir;
+    char            move_dir;
+    int             real_px;
+    int             real_py;
+
 }   t_game;
 
-
-typedef struct s_pnj {
+typedef struct s_ennemy {
     int     x;
     int     y;
     int     px_x;
     int     px_y;
     int     dir_x;
     int     dir_y;
-    int     frames;
-    void    *sprites[2];
-}   t_pnj;
+    void    *sprites[4];
+}   t_ennemy;
 
+int     check_player(char **map);
+int     check_exit(char **map);
+int     check_wall(char **map);
+int     check_item(char **map);
+char    **copy_map(char **map);
+void    flood_fill(char **map, int x, int y);
+int     check_map_solvable(char **map);
+size_t	ft_strlen(const char *str);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+char	*ft_build(char *stash, char *buffer);
+void	ft_keep_rest(char **ptr);
+char	*ft_create_line(char **ptr_stash, char **ptr_buffer, ssize_t count);
+char	*get_next_line(int fd);
+int     main (int argc, char **argv);
+void    create_game(t_game *game);
+int     gamberge(char **map);
+int     count_lines(char *file);
+char    **read_map(char *file);
+void    load_assets(t_game *game);
+void	put_player_sprite(t_game *game, int px, int py);
+void    fill_tile(t_game *game, int x, int y, char tile);
+void    render_map(t_game *game);
 
 #endif

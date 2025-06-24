@@ -4,8 +4,9 @@ CC = cc
 
 FLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c so_long.c create_game.c get_next_line.c \
-		get_next_line_utils.c check_map.c 
+SRCS = main.c so_long.h render_map.c get_next_line.c \
+		get_next_line_utils.c check_map.c flood_fill.c \
+		read_map.c utils.c 
 
 AR = ar rcs
 
