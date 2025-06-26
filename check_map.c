@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:05 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/18 19:25:58 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:55:38 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int check_player(char **map)
     while (map[y])
     {
         x = 0;
-        while(map[x])
+        while(map[y][x])
         {        
             if (map[y][x] == 'P')
                 count++;
@@ -45,7 +45,7 @@ int check_exit (char **map)
     while (map[y])
     {
         x = 0;
-        while(map[x])
+        while(map[y][x])
         {        
             if (map[y][x] == 'E')
                 count++;
@@ -56,7 +56,7 @@ int check_exit (char **map)
     return(count);
 }
 
-int check_item(int fd)
+int check_item(char **map)
 {
     int y;
     int x;
@@ -67,7 +67,7 @@ int check_item(int fd)
     while (map[y])
     {
         x = 0;
-        while(map[x])
+        while(map[y][x])
         {        
             if (map[y][x] == 'C')
                 count++;
@@ -78,60 +78,41 @@ int check_item(int fd)
     return(count);
 }
 
-int check_wall(int fd)
-{
-    char    *last_line;
-    char    *line;
-    int i;
-    int len;
-
-    i = 0;
-    line = get_next_line(fd);
-    len = ft_strlen(line);
-    while(line[i])
-    {
-        if (line[i] != '1')
-            return(1);
-        i++;
-    }
-    while(line = get_next_line(fd) != NULL)
-    {
-        last_line = line;
-        while(line[i])
-        {
-            if(line[0] != '1' || line[len - 1] != '1')
-                    return(1);
-            i++
-        }
-    }
-    i = 0;
-    while(last_line[i])
-    {
-        if (last_line[i] != '1')
-            return (1);
-        i++;
-    }
-    return(0)
-}
 int check_wall(char **map)
 {
     int x;
     int y;
     int count;
+    int len;
 
     count = 0;
     x = 0;
-    while (map[0])
+    while (map[0][x])
     {
-        if (map[0][x] != 1)
+        if (map[0][x] != '1')
             count++;
-            x++;
+        x++;
     }
+    len = x;
+    y = 0;
+    while (map[y])
+    {
+        x = 0;
+        while (map[y][x])
+        {
+            if (map[y][0] != '1' || map[y][len - 1] != '1')
+                count++;
+            x++;
+        }
+        y++;
+    }
+    y--;
     x = 0;
-    while ()
-
-
-
-
-
+    while (map[y][x])
+    {    
+        if (map[y][x] != '1')
+            count++;        
+        x++;
+    }
+    return (count); 
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floof_fill.c                                       :+:      :+:    :+:   */
+/*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:14:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/23 15:40:36 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:43:09 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char **copy_map(char **map)
     y = 0;
     while (map[y])
         y++;
-
-    copy = malloc(sizeof(char *) * (height + 1));
+    copy = malloc(sizeof(char *) * (y + 1));
     if (copy == NULL)
         return (NULL);
-    while (i < height)
+    i = 0;
+    while (i < y)
     {
         copy[i] = ft_strdup(map[i]);
         i++;
@@ -48,20 +48,34 @@ void flood_fill(char **map, int x, int y)
 }
 int check_map_solvable(char **map)
 {
-    int y;
-    int x;
+    char    **map_copy;
+    int     y;
+    int     x;
 
     y = 0;
-    while (map[y])
+    map_copy = copy_map(map);
+    while (map_copy[y])
     {
         x = 0;
-        while (map[y][x])
+        while (map_copy[y][x])
         {
-            if (map[y][x] == 'C' || map[y][x] == 'E')
-                return (0);
+            if(map_copy[y][x] == 'P')
+                flood_fill(map_copy, x, y);
             x++;
         }
         y++;
     }
-    return (1); 
+    y = 0;
+    while (map_copy[y])
+    {
+        x = 0;
+        while (map_copy[y][x])
+        {
+            if(map_copy[y][x] == 'C' || map_copy[y][x] == 'E')
+                return (1);
+            x++;
+        }
+        y++;
+    }
+    return (0); 
 }

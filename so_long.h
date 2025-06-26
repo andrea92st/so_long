@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/24 18:10:04 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:52:34 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_sprite_player {
 }   t_sprite_player;
 
 typedef struct s_game {
-    void        *mlx;
-    void        *win;
+    void            *mlx;
+    void            *win;
     
     void            *item_img;
     void            *exit_img;

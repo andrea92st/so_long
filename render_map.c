@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:07:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/23 16:36:10 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:52:31 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,19 @@ void render_map(t_game *game)
         y++;
     }
 }
+
+int animate (t_game *game)
+{
+    static int counter;
+
+    counter++;
+    while(counter > 15)
+    {
+        game->anim_frame = !game->anim_frame;
+        counter = 0;
+        render_map(game)
+    }
+    return(0);
+}
+
 
