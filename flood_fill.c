@@ -6,9 +6,11 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:14:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/26 16:43:09 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:53:39 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 char **copy_map(char **map)
 {
@@ -36,11 +38,9 @@ void flood_fill(char **map, int x, int y)
     if (map[y][x] == '1' || map[y][x] == 'X')
         return;
 
-    if (map[y][x] != '0' && map[y][x] != 'C' && map[y][x] != 'E' && map[y][x] != 'P')
-        return;
-
-    map[y][x] = 'X';
-
+    if (map[y][x] != '0' && map[y][x] != 'C' 
+        && map[y][x] != 'E' && map[y][x] != 'P')
+        map[y][x] = 'X';
     flood_fill(map, x + 1, y);
     flood_fill(map, x - 1, y);
     flood_fill(map, x, y + 1);

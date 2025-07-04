@@ -6,9 +6,11 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/26 16:52:36 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:53:15 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 static int gamberge(char **map)
 {

@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/26 16:52:34 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:39:15 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@
 # include <mlx.h>
 
 # define TILE_SIZE 32
+# define KEY_ESC 65037
+# define KEY_UP 119
+# define KEY_DOWN 115
+# define KEY_LEFT 97
+# define KEY_RIGHT 100
 
 typedef struct s_sprite_player {
-    void    *up_closed;
-    void    *down_closed;
-    void    *right_closed;
-    void    *left_closed;
-    void    *up_open;   
-    void    *down_open;
-    void    *right_open;
-    void    *left_open;
+    void    *up;
+    void    *down;
+    void    *right;
+    void    *left;
 }   t_sprite_player;
 
 typedef struct s_game {
@@ -48,27 +49,11 @@ typedef struct s_game {
     int             player_x;
     int             player_y;
 
-    int             nb_collectibles;
+    int             collectibles;
     int             anim_frame;
     
-    int             direction;
-
-    char            next_dir;
-    char            move_dir;
-    int             real_px;
-    int             real_py;
-
+    char             direction;
 }   t_game;
-
-typedef struct s_ennemy {
-    int     x;
-    int     y;
-    int     px_x;
-    int     px_y;
-    int     dir_x;
-    int     dir_y;
-    void    *sprites[4];
-}   t_ennemy;
 
 int     check_player(char **map);
 int     check_exit(char **map);

@@ -6,7 +6,7 @@
 /*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:07:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/06/26 16:52:31 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:39:26 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,24 @@ void    load_assets(t_game *game)
     game->item_img = mlx_xpm_file_to_image(game->mlx, "assets/item.xpm", &h ,&w);
     game->exit_img = mlx_xpm_file_to_image(game->mlx, "assets/exit.xpm", &h ,&w);
    
-    game->player_left_open = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_left_open.xpm", &h ,&w);
-    game->player_right_open = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_right_open.xpm", &h ,&w);
-    game->player_up_open = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_up_open.xpm", &h ,&w);
-    game->player_down_open = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_down_open.xpm", &h ,&w);
-    game->player_left_close = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_left_close.xpm", &h ,&w);
-    game->player_right_close = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_right_close.xpm", &h ,&w);
-    game->player_up_close = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_up_close.xpm", &h ,&w);
-    game->player_down_close = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_down_close.xpm", &h ,&w);
+    game->player_left = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_left_open.xpm", &h ,&w);
+    game->player_right = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_right_open.xpm", &h ,&w);
+    game->player_up = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_up_open.xpm", &h ,&w);
+    game->player_down = mlx_xpm_file_to_image(game->mlx, "assets/pacman_sprite/pacman_down_open.xpm", &h ,&w);
 }
 
 void	put_player_sprite(t_game *game, int px, int py)
 {
 	void *sprite = NULL;
 
-	if (game->player_dir == 'U')
-		sprite = (game->anim_frame) ? game->player.up_open : game->player.up_closed;
-	else if (game->player_dir == 'D')
-		sprite = (game->anim_frame) ? game->player.down_open : game->player.down_closed;
-	else if (game->player_dir == 'L')
-		sprite = (game->anim_frame) ? game->player.left_open : game->player.left_closed;
-	else if (game->player_dir == 'R')
-		sprite = (game->anim_frame) ? game->player.right_open : game->player.right_closed;
-
+	if (game->direction == 'W')
+		sprite = game->player.up;
+	else if (game->direction == 'S')
+		sprite = game->player.down;
+	else if (game->direction == 'A')
+		sprite = game->player.left;
+	else if (game->direction == 'D')
+		sprite = game->player.right;
 	if (sprite)
 		mlx_put_image_to_window(game->mlx, game->win, sprite, px, py);
 }
@@ -58,15 +53,14 @@ void fill_tile(t_game *game, int x, int y, char tile)
     py = (y * TILE_SIZE);
     if (tile == '1')
         mlx_put_image_to_window(game->mlx, game->win, game->wall_img, px, py);
+    else if (tile == 'E')
+        mlx_put_image_to_window(game->mlx, game->win, game->exit_img, px, py);
+    else if (tile == 'C')
+        mlx_put_image_to_window(game->mlx, game->win, game->item_img, px, py);
+    else if (tile == 'P')
+        put_player_sprite(game, px, py);
     else 
         mlx_put_image_to_window(game->mlx, game->win, game->ground_img, px, py);
-
-        else if (tile == 'E')
-            mlx_put_image_to_window(game->mlx, game->win, game->exit_img, px, py);
-        else if (tile == 'C')
-            mlx_put_image_to_window(game->mlx, game->win, game->item_img, px, py);
-        else if (tile == 'P')
-            put_player_sprite(game, px, py);
 }
 
 void render_map(t_game *game)
@@ -87,18 +81,5 @@ void render_map(t_game *game)
     }
 }
 
-int animate (t_game *game)
-{
-    static int counter;
-
-    counter++;
-    while(counter > 15)
-    {
-        game->anim_frame = !game->anim_frame;
-        counter = 0;
-        render_map(game)
-    }
-    return(0);
-}
 
 

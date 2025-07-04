@@ -1,5 +1,5 @@
 /* XPM */
-static char * pacman_open_down_xpm[] = {
+static char * pacman_down_xpm[] = {
 "32 32 72 1",
 " 	c None",
 ".	c #040403",
